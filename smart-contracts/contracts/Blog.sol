@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.4.21;
 
 import 'zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
 
@@ -8,16 +8,17 @@ contract Blog is ERC721Token {
   event PostTipped(bytes32 indexed id, address indexed tipper, uint amount);
 
   mapping (bytes32 => bool) postExists;
+  mapping (uint => bytes32) tokenToPostId;
   uint numberOfPosts = 0;
 
-	constructor() public {
-		owner = msg.sender;
-	}
+  function Blog(string _name, string _symbol) public ERC721Token(_name, _symbol) {
+  }
 
   function submitPost(bytes32 _id, bytes32 _ipfsHash) {
     require(postExists[_id] == false);
     postExists[_id] = true;
     numberOfPosts ++;
+    tokenToPostId[numberOfPosts] = _id;
     _mint(msg.sender, numberOfPosts);
     emit PostSubmitted(_id, _ipfsHash, msg.sender);
   }
@@ -34,4 +35,3 @@ contract Blog is ERC721Token {
 	}
 
 }
-
