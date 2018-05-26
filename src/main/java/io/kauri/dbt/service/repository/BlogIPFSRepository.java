@@ -14,13 +14,8 @@ import net.consensys.tools.ipfs.ipfsstore.client.springdata.impl.IPFSStoreReposi
 public class BlogIPFSRepository extends IPFSStoreRepositoryImpl<Document, String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BlogIPFSRepository.class);
-    private static final String KEY = "article";
+    private static final String KEY = "blog";
     
-    /**
-     * Constructor for the repository IPFSArticleRepository
-     * @param config Configuration map containing each index
-     * @param client IPFS Store client
-     */
     @Autowired
     public BlogIPFSRepository(IPFSStoreConfig config, IPFSStore client) {
         super(client, 
