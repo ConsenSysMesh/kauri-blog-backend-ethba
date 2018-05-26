@@ -78,7 +78,7 @@ services:
       - kafka
     environment:
       SPRING_DATA_MONGODB_HOST: mongodb
-      ETHEREUM_NODE_URL: http://eth-node:8545
+      ETHEREUM_NODE_URL: http://52.208.46.161:8549
       ZOOKEEPER_ADDRESS: zookeeper:2181
       KAFKA_ADDRESSES: kafka:9092
       EVENTSTORE_TYPE: DB
