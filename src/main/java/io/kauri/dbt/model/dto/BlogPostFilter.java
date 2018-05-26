@@ -1,4 +1,4 @@
-package io.kauri.dbt.model.dto.filter;
+package io.kauri.dbt.model.dto;
 
 import java.util.Date;
 

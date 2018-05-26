@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import io.kauri.dbt.configuration.IPFSStoreConfig;
 import io.kauri.dbt.model.Document;
-import io.kauri.dbt.model.dto.filter.BlogPostFilter;
+import io.kauri.dbt.model.dto.BlogPostFilter;
 import net.consensys.tools.ipfs.ipfsstore.client.java.IPFSStore;
 import net.consensys.tools.ipfs.ipfsstore.client.springdata.impl.IPFSStoreRepositoryImpl;
 import net.consensys.tools.ipfs.ipfsstore.dto.query.Query;

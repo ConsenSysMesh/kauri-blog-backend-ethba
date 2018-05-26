@@ -9,7 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import io.kauri.dbt.model.dto.BlogPost;
-import io.kauri.dbt.model.dto.filter.BlogPostFilter;
+import io.kauri.dbt.model.dto.BlogPostFilter;
 import io.kauri.dbt.model.exception.DBTException;
 import io.kauri.dbt.service.BlogService;
 import io.leangen.graphql.annotations.GraphQLArgument;

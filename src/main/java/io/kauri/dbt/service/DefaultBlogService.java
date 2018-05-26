@@ -17,7 +17,7 @@ import io.kauri.dbt.model.Document;
 import io.kauri.dbt.model.Status;
 import io.kauri.dbt.model.dto.Blog;
 import io.kauri.dbt.model.dto.BlogPost;
-import io.kauri.dbt.model.dto.filter.BlogPostFilter;
+import io.kauri.dbt.model.dto.BlogPostFilter;
 import io.kauri.dbt.model.exception.DBTException;
 import io.kauri.dbt.service.repository.BlogMongoRepository;
 import io.kauri.dbt.service.repository.BlogPostIPFSRepository;

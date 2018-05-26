@@ -33,11 +33,6 @@ import io.leangen.graphql.metadata.strategy.query.AnnotatedResolverBuilder;
 import io.leangen.graphql.metadata.strategy.query.PublicResolverBuilder;
 import io.leangen.graphql.metadata.strategy.value.jackson.JacksonValueMapperFactory;
 
-/**
- * 
- * @author Gregoire Jeanmart <gregoire.jeanmart@consensys.net>
- *
- */
 public abstract class AbstractController extends TextWebSocketHandler {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractController.class);

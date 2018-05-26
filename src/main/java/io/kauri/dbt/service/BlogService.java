@@ -5,7 +5,7 @@ import org.springframework.data.domain.PageRequest;
 
 import io.kauri.dbt.model.dto.Blog;
 import io.kauri.dbt.model.dto.BlogPost;
-import io.kauri.dbt.model.dto.filter.BlogPostFilter;
+import io.kauri.dbt.model.dto.BlogPostFilter;
 import io.kauri.dbt.model.exception.DBTException;
 
 public interface BlogService {
