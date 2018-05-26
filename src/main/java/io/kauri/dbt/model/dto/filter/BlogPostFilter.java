@@ -8,7 +8,7 @@ import io.kauri.dbt.model.Status;
 import lombok.Data;
 
 @Data
-public class BlogFilter {
+public class BlogPostFilter {
 
     private String fullText;
     
@@ -33,7 +33,7 @@ public class BlogFilter {
     public String getFullText() {
         return fullText;
     }
-    public BlogFilter setFullText(String fullText) {
+    public BlogPostFilter setFullText(String fullText) {
         this.fullText = fullText;
         return this;
     }
@@ -41,7 +41,7 @@ public class BlogFilter {
     public Date getDateCreatedLessThan() {
         return dateCreatedLessThan;
     }
-    public BlogFilter setDateCreatedLessThan(Date dateCreatedLessThan) {
+    public BlogPostFilter setDateCreatedLessThan(Date dateCreatedLessThan) {
         this.dateCreatedLessThan = dateCreatedLessThan;
         return this;
     }
@@ -49,7 +49,7 @@ public class BlogFilter {
     public Date getDateCreatedGreaterThan() {
         return dateCreatedGreaterThan;
     }
-    public BlogFilter setDateCreatedGreaterThan(Date dateCreatedGreaterThan) {
+    public BlogPostFilter setDateCreatedGreaterThan(Date dateCreatedGreaterThan) {
         this.dateCreatedGreaterThan = dateCreatedGreaterThan;
         return this;
     }
@@ -57,7 +57,7 @@ public class BlogFilter {
     public Date getDateUpdatedLessThan() {
         return dateUpdatedLessThan;
     }
-    public BlogFilter setDateUpdatedLessThan(Date dateUpdatedLessThan) {
+    public BlogPostFilter setDateUpdatedLessThan(Date dateUpdatedLessThan) {
         this.dateUpdatedLessThan = dateUpdatedLessThan;
         return this;
     }
@@ -65,7 +65,7 @@ public class BlogFilter {
     public Date getDateCUpdatedreaterThan() {
         return dateUpdatedGreaterThan;
     }
-    public BlogFilter setDateUpdatedGreaterThan(Date dateUpdatedGreaterThan) {
+    public BlogPostFilter setDateUpdatedGreaterThan(Date dateUpdatedGreaterThan) {
         this.dateUpdatedGreaterThan = dateUpdatedGreaterThan;
         return this;
     }
@@ -73,7 +73,7 @@ public class BlogFilter {
     public String getUserIdEqual() {
         return userIdEqual;
     }
-    public BlogFilter setUserId(String userIdEqual) {
+    public BlogPostFilter setUserId(String userIdEqual) {
         this.userIdEqual = userIdEqual;
         return this;
     }
@@ -81,7 +81,7 @@ public class BlogFilter {
     public String getTitleContain() {
         return titleContain;
     }
-    public BlogFilter setTitleContain(String titleContain) {
+    public BlogPostFilter setTitleContain(String titleContain) {
         this.titleContain = titleContain;
         return this;
     }
@@ -89,7 +89,7 @@ public class BlogFilter {
     public String getTextContain() {
         return textContain;
     }
-    public BlogFilter setTextContain(String textContain) {
+    public BlogPostFilter setTextContain(String textContain) {
         this.textContain = textContain;
         return this;
     }
@@ -97,7 +97,7 @@ public class BlogFilter {
     public Status[] getStatusIn() {
         return statusIn;
     }
-    public BlogFilter setStatusIn(Status... statusIn) {
+    public BlogPostFilter setStatusIn(Status... statusIn) {
         this.statusIn = statusIn;
         return this;
     }
