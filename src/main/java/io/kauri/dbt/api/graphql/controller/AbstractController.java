@@ -48,7 +48,7 @@ public abstract class AbstractController extends TextWebSocketHandler {
         GraphQLSchemaGenerator generator = new GraphQLSchemaGenerator()
                 .withResolverBuilders(
                         new AnnotatedResolverBuilder(), //Resolve by annotations
-                        new PublicResolverBuilder("net.consensys.flow.knowledgebase")) //Resolve public methods inside root package
+                        new PublicResolverBuilder("io.kauri.dbt")) //Resolve public methods inside root package
                 .withValueMapperFactory(new JacksonValueMapperFactory());
         
         for(Object service: services) {

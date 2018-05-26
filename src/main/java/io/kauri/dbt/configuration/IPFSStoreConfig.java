@@ -49,9 +49,6 @@ public class IPFSStoreConfig implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        log.debug("###############################");
-        log.debug(indexes);
-        log.debug("###############################");
         indexes.forEach((k,v)->{
             try {
                 log.info("Registering Index " + v.getName() + "...");
