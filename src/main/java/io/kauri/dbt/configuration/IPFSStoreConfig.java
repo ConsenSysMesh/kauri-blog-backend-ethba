@@ -1,9 +1,6 @@
 package io.kauri.dbt.configuration;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -15,9 +12,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import net.consensys.tools.ipfs.ipfsstore.client.java.IPFSStore;
 import net.consensys.tools.ipfs.ipfsstore.client.java.exception.IPFSStoreException;
 import net.consensys.tools.ipfs.ipfsstore.client.java.wrapper.IPFSStoreWrapper;
@@ -55,6 +49,9 @@ public class IPFSStoreConfig implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        log.debug("###############################");
+        log.debug(indexes);
+        log.debug("###############################");
         indexes.forEach((k,v)->{
             try {
                 log.info("Registering Index " + v.getName() + "...");
@@ -71,33 +68,6 @@ public class IPFSStoreConfig implements InitializingBean {
     public void setIndexes(Map<String, IndexConfiguration> indexes) {
         this.indexes = indexes;
     }
-    
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public class IndexConfiguration {
-        private static final String SEPARATOR = ",";
-        
-        private String name;
-        private String fields;
-        private String fullTextFields;
-        
-        public Set<String> getFields() {
-            if(fields == null || fields.isEmpty()) {
-                return null;
-            }
-            String[] values = fields.split(SEPARATOR);
-            return new HashSet<String>(Arrays.asList(values));
-        }
-        
-        public Set<String> getFullTextFields() {
-            if(fullTextFields == null || fullTextFields.isEmpty()) {
-                return null;
-            }
-            String[] values = fullTextFields.split(SEPARATOR);
-            return new HashSet<String>(Arrays.asList(values));
-        }
-      
-    }
+   
     
 }

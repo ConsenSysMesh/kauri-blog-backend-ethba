@@ -1,10 +1,13 @@
 package io.kauri.dbt.service;
 
+import org.springframework.stereotype.Service;
+
 import io.kauri.dbt.message.details.EventeumEventDetails;
 import io.kauri.dbt.model.dto.BlogPost;
 import io.kauri.dbt.model.exception.DBTException;
 import lombok.extern.slf4j.Slf4j;
 
+@Service
 @Slf4j
 public class DefaultReconciliationService implements ReconciliationService {
     
