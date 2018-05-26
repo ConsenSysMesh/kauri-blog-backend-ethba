@@ -14,6 +14,12 @@ module.exports = {
         return new HDWalletProvider(mnemonic, "https://rinkeby.infura.io/")
       },
       network_id: 3
-    }  
+    },
+    ropsten: {
+      provider: function() {
+        return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/")
+      },
+      network_id: 2
+    }    
   }
 };
