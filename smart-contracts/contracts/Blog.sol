@@ -10,13 +10,9 @@ contract Blog is ERC721Token {
   mapping (bytes32 => bool) postExists;
   uint numberOfPosts = 0;
 
-  constructor() public {
-    // owner = msg.sender;
-  }
-
-  // modifier restricted() {
-  //   if (msg.sender == owner) _;
-  // }
+	constructor() public {
+		owner = msg.sender;
+	}
 
   function submitPost(bytes32 _id, bytes32 _ipfsHash) {
     require(postExists[_id] == false);
@@ -26,15 +22,16 @@ contract Blog is ERC721Token {
     emit PostSubmitted(_id, _ipfsHash, msg.sender);
   }
 
-  function tipPost(bytes32 _id, address _author) {
-    require(postExists[_id] == true);
-    _author.transfer(msg.value);
-    emit PostTipped(_id, msg.sender, msg.value);
-  }
+	function tipPost(bytes32 _id, address _author) {
+		require(postExists[_id] == true);
+		_author.transfer(msg.value);
+		emit PostTipped(_id, msg.sender, msg.value);
+	}
 
-  function tipBlog(bytes32 _id, address _author) {
-    _author.transfer(msg.value);
-    emit BlogTipped(msg.sender, _author, msg.value);
-  }
+	function tipBlog(bytes32 _id, address _author) {
+		_author.transfer(msg.value);
+		emit BlogTipped(msg.sender, _author, msg.value);
+	}
 
 }
+
