@@ -21,6 +21,7 @@ public class BlogPost {
     private String contentHash;
     private Date dateCreated;
     private Date dateUpdated;
+    private String blogName;
 
     public BlogPost(String id, String user, String title, String content) {
         this(user, title, content);

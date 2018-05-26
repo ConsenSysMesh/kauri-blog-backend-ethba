@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface BlogMongoRepository extends MongoRepository<Blog, String> {
 
-    List<Blog> findByUser(String user);
+    Blog findOneByUser(String user);
 }

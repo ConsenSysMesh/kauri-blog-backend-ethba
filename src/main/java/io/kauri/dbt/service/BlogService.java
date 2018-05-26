@@ -11,12 +11,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import io.kauri.dbt.model.Document;
 import io.kauri.dbt.model.Status;
 import io.kauri.dbt.model.dto.Blog;
 import io.kauri.dbt.model.dto.BlogPost;
 import io.kauri.dbt.model.dto.filter.BlogPostFilter;
+import io.kauri.dbt.service.repository.BlogMongoRepository;
 import io.kauri.dbt.service.repository.BlogPostIPFSRepository;
 import net.consensys.tools.ipfs.ipfsstore.dto.Metadata;
 import net.consensys.tools.ipfs.ipfsstore.exception.NotFoundException;
@@ -28,11 +30,13 @@ public class BlogService {
 
     private StoreService storeService;
     private BlogPostIPFSRepository blogPostRepository;
+    private BlogMongoRepository blogMongoRepository;
     
     @Autowired
-    public BlogService(BlogPostIPFSRepository repository, StoreService storeService) {
+    public BlogService(BlogPostIPFSRepository repository, StoreService storeService, BlogMongoRepository blogMongoRepository) {
         this.blogPostRepository = repository;
         this.storeService = storeService;
+        this.blogMongoRepository = blogMongoRepository;
     }
     
     public Page<BlogPost> searchBlogPost(PageRequest pagination, BlogPostFilter filter) {
@@ -51,7 +55,7 @@ public class BlogService {
     }
     
     public void createBlog(Blog blog) {
-        //todo
+        blogMongoRepository.save(blog);
     }
     
     public String submitBlogPost(BlogPost post) {
@@ -62,8 +66,13 @@ public class BlogService {
         doc.setUser(post.getUser());
         doc.setId(post.getId());
         
+        
         Map<String, Object> indexFields = new HashMap<>();
         indexFields.put("status", Status.DRAFT);
+        if(StringUtils.isEmpty(post.getId())) {
+            indexFields.put("dateCreated", new Date());
+        }
+        indexFields.put("dateUpdated", new Date());
         
         doc = blogPostRepository.save(doc, indexFields);
         
@@ -91,6 +100,7 @@ public class BlogService {
             Date dateCreated = new Date(stamp.getTime());
             post.setDateCreated(dateCreated);
             post.setTotalTip((Long) meta.getIndexFieldValue("totalTips"));
+            post.setBlogName(blogMongoRepository.findOneByUser(doc.getUser()).getName());
             
             return post;
         } catch (ServiceException e) {
