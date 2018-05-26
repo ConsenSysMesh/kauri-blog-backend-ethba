@@ -40,7 +40,6 @@ node_modules
 package-lock.json
 
 #Truffle
-build/
 secrets.json
 
 #GKE Secret

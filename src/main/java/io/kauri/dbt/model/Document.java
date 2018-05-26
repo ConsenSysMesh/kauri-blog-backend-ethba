@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Document {
-
+    private String hash;    
     private String id;
     private String title;
     private String content;

@@ -5,9 +5,15 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.kauri.dbt.model.Status;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class BlogPostFilter {
 
     private String fullText;

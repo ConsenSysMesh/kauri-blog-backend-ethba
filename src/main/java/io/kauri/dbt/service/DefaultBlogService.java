@@ -43,6 +43,7 @@ public class DefaultBlogService implements BlogService {
     }
     
     public Page<BlogPost> searchBlogPost(PageRequest pagination, BlogPostFilter filter) throws DBTException  {
+        log.debug("searchBlogPost");
         Page<Document> documents = blogPostRepository.findByFilter(pagination, filter);
 
         return new PageImpl<>(
@@ -67,10 +68,14 @@ public class DefaultBlogService implements BlogService {
     }
     
     public BlogPost saveDraft(BlogPost post) throws DBTException {
-        BlogPost current = this.getBlogPost(post.getId());
-        if(current.getStatus().equals(Status.PUBLISHED)) {
-            throw new DBTException("Blog post "+post.getId()+" already published"); 
+        
+        if(!StringUtils.isEmpty(post.getId())){
+            BlogPost current = this.getBlogPost(post.getId());
+            if(current.getStatus().equals(Status.PUBLISHED)) {
+                throw new DBTException("Blog post "+post.getId()+" already published"); 
+            } 
         }
+        
         return this.save(post, Status.DRAFT);
     }
     
@@ -120,10 +125,14 @@ public class DefaultBlogService implements BlogService {
             post.setContentHash(meta.getHash());
             post.setStatus(Status.valueOf((String) meta.getIndexFieldValue("status")));
             
-            Timestamp stamp = new Timestamp((Long) meta.getIndexFieldValue("dateCreated"));
-            Date dateCreated = new Date(stamp.getTime());
+            Timestamp dateCreatedStamp = new Timestamp((Long) meta.getIndexFieldValue("dateCreated"));
+            Date dateCreated = new Date(dateCreatedStamp.getTime());
             post.setDateCreated(dateCreated);
-            post.setTotalTip((Long) meta.getIndexFieldValue("totalTips"));
+            
+            Timestamp dateUpdatedStamp = new Timestamp((Long) meta.getIndexFieldValue("dateUpdated"));
+            Date dateUpdated = new Date(dateUpdatedStamp.getTime());
+            post.setDateUpdated(dateUpdated);
+            //post.setTotalTip((Long) meta.getIndexFieldValue("totalTips"));
             post.setBlogName(blogMongoRepository.findOneByUser(doc.getUser()).getName());
             
             return post;
