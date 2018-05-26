@@ -88,9 +88,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>net.consensys.tools.ipfs</groupId>
-			<artifactId>ipfs-store-client-springdata</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+		    <groupId>net.consensys.tools.ipfs</groupId>
+		    <artifactId>ipfs-store-client-springdata</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
+    		<exclusions>
+    			<exclusion>
+				    <groupId>org.elasticsearch</groupId>
+				    <artifactId>elasticsearch</artifactId>
+    			</exclusion>
+			</exclusions>
 		</dependency>
     </dependencies>
   
