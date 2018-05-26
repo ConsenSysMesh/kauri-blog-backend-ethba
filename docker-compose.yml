@@ -66,6 +66,27 @@ services:
     environment:
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
 
+  eventeum:
+    build:
+      context: .
+      dockerfile: Dockerfile-Eventeum
+    ports:
+      - "8060:8060"
+    depends_on:
+      - parity
+      - mongodb
+      - kafka
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
+      ETHEREUM_NODE_URL: http://eth-node:8545
+      ZOOKEEPER_ADDRESS: zookeeper:2181
+      KAFKA_ADDRESSES: kafka:9092
+      EVENTSTORE_TYPE: DB
+      BROADCASTER_EVENT_CONFIRMATION_NUMBLOCKSTOWAIT: 0
+      BROADCASTER_MULTIINSTANCE: "false"
+    networks:
+      - default
+
   dbt:
     build: ./
     ports:
@@ -79,6 +100,7 @@ services:
       - ipfs
       - zookeeper
       - kafka
+      - eventeum
     environment:
       SPRING_DATA_MONGODB_HOST: mongodb
       ETHEREUM_NODE_URL: http://eth-node:8545

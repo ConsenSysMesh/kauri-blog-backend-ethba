@@ -67,4 +67,10 @@ kafka:
     addresses: ${KAFKA_ADDRESSES:localhost:9092}
   topic:
     contractEvents: contract-events
+
+eventeum:
+  url: http://eventeum:8060
+  rest:
+    route:
+      filter: /api/rest/v1/event-filter
      

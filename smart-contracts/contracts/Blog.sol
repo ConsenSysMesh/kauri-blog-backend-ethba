@@ -3,7 +3,7 @@ pragma solidity ^0.4.21;
 import 'zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
 
 contract Blog is ERC721Token {
-  event PostSubmitted(bytes32 indexed id, bytes32 ipfsHash, address indexed creator);
+  event PostSubmitted(bytes32 indexed id, address indexed creator, bytes32 ipfsHash);
   event BlogTipped(address indexed tipper, address indexed author, uint amount);
   event PostTipped(bytes32 indexed id, address indexed tipper, uint amount);
 
@@ -20,7 +20,7 @@ contract Blog is ERC721Token {
     numberOfPosts ++;
     tokenToPostId[numberOfPosts] = _id;
     _mint(msg.sender, numberOfPosts);
-    emit PostSubmitted(_id, _ipfsHash, msg.sender);
+    emit PostSubmitted(_id, msg.sender, _ipfsHash);
   }
 
 	function tipPost(bytes32 _id, address _author) public payable {
