@@ -30,7 +30,7 @@ public class GraphqlMutationService {
 
         Blog blog = new Blog(user, name, tipAmount);
         
-        //TODO store blog in mongo db
+        blogService.createBlog(blog);
         
         return blog;
     }
