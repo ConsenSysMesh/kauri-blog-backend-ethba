@@ -45,7 +45,7 @@ public class BlogPostIPFSRepository extends IPFSStoreRepositoryImpl<Document, St
                 query.greaterThan("date_updated", filter.getDateUpdatedGreaterThan().getTime());
             }
             if(filter.getUserIdEqual() != null) {
-                query.equals("user_id", filter.getUserIdEqual().toLowerCase());
+                query.equals("user", filter.getUserIdEqual().toLowerCase());
             }
             if(filter.getStatusIn() != null && filter.getStatusIn().length > 0) {
                 query.in("status", filter.getStatusIn());
