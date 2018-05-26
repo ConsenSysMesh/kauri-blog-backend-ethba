@@ -23,10 +23,10 @@ public class RESTEventeumService implements EventeumService {
         api.addEventFilter(eventFilter);
     }
 
-    @FeignClient(name="eventeum", url="${eventeum.url}")
+    @FeignClient(name="eventeum", url="#{eventeumSettings.url}")
     public interface EventeumRESTApi {
 
-        @RequestMapping(method = RequestMethod.POST, value="${eventeum.rest.route.filter}")
+        @RequestMapping(method = RequestMethod.POST, value="#{eventeumSettings.filterRoute}")
         AddEventFilterResponse addEventFilter(@RequestBody ContractEventFilter filter);
     }
 

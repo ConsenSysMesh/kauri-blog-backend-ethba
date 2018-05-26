@@ -2,6 +2,7 @@ package io.kauri.dbt.integration.eventeum;
 
 import io.kauri.dbt.model.dto.eventeum.ParameterType;
 import io.kauri.dbt.service.EventeumService;
+import io.kauri.dbt.settings.EventeumSettings;
 import io.kauri.dbt.utils.ContractEventFilterBuilder;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,12 @@ public class EventeumRegistrar implements InitializingBean {
 
     private EventeumService eventeumService;
 
+    private EventeumSettings eventeumSettings;
+
     @Autowired
-    public EventeumRegistrar(EventeumService eventeumService) {
+    public EventeumRegistrar(EventeumService eventeumService, EventeumSettings eventeumSettings) {
         this.eventeumService = eventeumService;
+        this.eventeumSettings = eventeumSettings;
     }
 
     @Override
@@ -55,6 +59,6 @@ public class EventeumRegistrar implements InitializingBean {
     }
 
     private String getContractAddress() {
-        return "0x4aecf261541f168bb3ca65fa8ff5012498aac3b8";
+        return eventeumSettings.getContractAddress();
     }
 }

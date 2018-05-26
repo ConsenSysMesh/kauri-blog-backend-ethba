@@ -71,6 +71,7 @@ kafka:
 
 eventeum:
   url: http://eventeum:8060
+  contractAddress: 0x4aecf261541f168bb3ca65fa8ff5012498aac3b8
   rest:
     route:
       filter: /api/rest/v1/event-filter
