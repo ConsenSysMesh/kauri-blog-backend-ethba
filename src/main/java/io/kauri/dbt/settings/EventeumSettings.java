@@ -12,7 +12,4 @@ public class EventeumSettings {
 
     @Value("${eventeum.contractAddress}")
     private String contractAddress;
-
-    @Value("${eventeum.rest.route.filter}")
-    private String filterRoute;
 }
