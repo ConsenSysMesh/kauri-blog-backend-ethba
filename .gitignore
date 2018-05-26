@@ -49,3 +49,5 @@ client-secret.json
 apikey.py
 #Docker
 *.*docker*
+
+.DS_Store
