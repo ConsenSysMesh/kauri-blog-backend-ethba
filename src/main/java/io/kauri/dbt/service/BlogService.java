@@ -1,44 +1,23 @@
 package io.kauri.dbt.service;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import io.kauri.dbt.model.Document;
-import io.kauri.dbt.model.Status;
 import io.kauri.dbt.model.dto.Blog;
 import io.kauri.dbt.model.dto.BlogPost;
-import io.kauri.dbt.service.repository.BlogIPFSRepository;
+import io.kauri.dbt.model.dto.BlogPostFilter;
+import io.kauri.dbt.model.exception.DBTException;
 
-@Service
-public class BlogService {
+public interface BlogService {
 
-    private BlogIPFSRepository repository;
-    
-    @Autowired
-    public BlogService(BlogIPFSRepository repository) {
-        this.repository = repository;
-    }
-    
-    public void createBlog(Blog blog) {
-        //todo
-    }
-    
-    public String submitBlogPost(BlogPost post) {
-        
-        Document doc = new Document();
-        doc.setContent(post.getContent());
-        doc.setTitle(post.getTitle());
-        doc.setUser(post.getUser());
-        doc.setId(post.getId());
-        
-        Map<String, Object> indexFields = new HashMap<>();
-        indexFields.put("status", Status.DRAFT);
-        
-        doc = repository.save(doc, indexFields);
-        
-        return doc.getId();
-    }
+    public Page<BlogPost> searchBlogPost(PageRequest pagination, BlogPostFilter filter) throws DBTException;
+
+    public BlogPost getBlogPost(String id) throws DBTException;
+
+    public void createBlog(Blog blog) throws DBTException;
+
+    public BlogPost saveDraft(BlogPost post) throws DBTException;
+
+    public BlogPost publish(BlogPost post) throws DBTException;
+
 }

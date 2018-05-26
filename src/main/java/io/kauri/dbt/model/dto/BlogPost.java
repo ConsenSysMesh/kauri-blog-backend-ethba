@@ -1,5 +1,7 @@
 package io.kauri.dbt.model.dto;
 
+import java.util.Date;
+
 import io.kauri.dbt.model.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,9 +16,12 @@ public class BlogPost {
     private String user;
     private String title;
     private String content;
-    private int totalTip;
+    private double totalTip;
     private Status status;
     private String contentHash;
+    private Date dateCreated;
+    private Date dateUpdated;
+    private String blogName;
 
     public BlogPost(String id, String user, String title, String content) {
         this(user, title, content);

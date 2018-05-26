@@ -1,3 +1,13 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8080
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    net.consensys: ${LOG_LEVEL:INFO}
+
 #For IPFS-Doc-Persister Service
 ipfs-store:
   storage:
@@ -45,7 +55,16 @@ ipfs-store:
 ipfs-document-persiter:
   indexes:
     request:
-      name: blog
+      name: blogpost
       fields: id,title,content,user
       fullTextFields: title,content
+
+# For Kafka
+zookeeper:
+  address: ${ZOOKEEPER_ADDRESS:localhost:2181}
+kafka:
+  bootstrap:
+    addresses: ${KAFKA_ADDRESSES:localhost:9092}
+  topic:
+    contractEvents: contract-events
      

@@ -14,13 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.kauri.dbt.api.graphql.GraphqlMutationService;
 import io.kauri.dbt.api.graphql.GraphqlQueryService;
 
-/**
- * GraphQL Endpoint of the Knowledge Base
- * All the HTTP requests are routed to the GraphQL Mutation or Query services
- * 
- * @author Gregoire Jeanmart <gregoire.jeanmart@consensys.net>
- *
- */
 @RestController
 public class GraphQLController extends AbstractController {
 

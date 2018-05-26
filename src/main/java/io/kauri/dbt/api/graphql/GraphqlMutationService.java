@@ -2,9 +2,7 @@ package io.kauri.dbt.api.graphql;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import io.kauri.dbt.model.Status;
 import io.kauri.dbt.model.dto.Blog;
 import io.kauri.dbt.model.dto.BlogPost;
 import io.kauri.dbt.model.exception.DBTException;
@@ -27,13 +25,12 @@ public class GraphqlMutationService {
             @GraphQLArgument(name = "user") String user,
             @GraphQLArgument(name = "name") String name) throws DBTException {
 
-        Blog blog = new Blog(user, name);
+        Blog blog = new Blog(user, name, 0);
         
-        //TODO store blog in mongo db
+        blogService.createBlog(blog);
         
         return blog;
     }
-    
 
     @GraphQLMutation(name = "savePost")
     public BlogPost savePost(
@@ -42,15 +39,8 @@ public class GraphqlMutationService {
             @GraphQLArgument(name = "title") String title,
             @GraphQLArgument(name = "content") String content) throws DBTException {
  
-        BlogPost post = null;
-        if(StringUtils.isEmpty(id)) { // new blogpost
-            post = new BlogPost(user, title, content);      
-        } else { // update
-            post = new BlogPost(id, user, title, content);   
-        }
-        
-        blogService.submitBlogPost(post);
-        
-        return post;
+        BlogPost post = new BlogPost(id, user, title, content);
+
+        return blogService.saveDraft(post);
     } 
 }

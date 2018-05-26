@@ -24,14 +24,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
  		<dependency>
  			<groupId>org.springframework.boot</groupId>
  			<artifactId>spring-boot-starter-websocket</artifactId>
  		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
 
 		<!-- Development -->
         <dependency>
@@ -87,11 +87,40 @@
 		    <version>2.1.8</version>
 		</dependency>
 
+
+        <!-- IPFS-store-->
+    	<dependency>
+		    <groupId>org.elasticsearch</groupId>
+		    <artifactId>elasticsearch</artifactId>
+		    <version>5.6.4</version>
+		</dependency>
 		<dependency>
-			<groupId>net.consensys.tools.ipfs</groupId>
-			<artifactId>ipfs-store-client-springdata</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+		    <groupId>net.consensys.tools.ipfs</groupId>
+		    <artifactId>ipfs-store-client-springdata</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
+    		<exclusions>
+    			<exclusion>
+				    <groupId>org.elasticsearch</groupId>
+				    <artifactId>elasticsearch</artifactId>
+    			</exclusion>
+			</exclusions>
 		</dependency>
     </dependencies>
+
+    <build>
+        <finalName>dbt</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <addResources>true</addResources>
+                    <jvmArguments>
+                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
+                    </jvmArguments>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
   
 </project>

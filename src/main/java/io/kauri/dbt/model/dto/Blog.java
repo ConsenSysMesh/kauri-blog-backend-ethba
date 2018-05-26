@@ -11,5 +11,5 @@ public class Blog {
 
     private String user;
     private String name;
-    
+    private double tipAmount;
 }

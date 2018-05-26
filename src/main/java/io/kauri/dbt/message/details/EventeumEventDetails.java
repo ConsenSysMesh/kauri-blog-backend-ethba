@@ -3,6 +3,7 @@ package io.kauri.dbt.message.details;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.kauri.dbt.message.details.parameter.EventParameter;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.math.BigInteger;
@@ -11,6 +12,7 @@ import java.util.List;
 @EqualsAndHashCode
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Data
 public class EventeumEventDetails {
 
     private String name;
