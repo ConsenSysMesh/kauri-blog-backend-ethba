@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaSettings {
 
+    @Value("${kafka.bootstrap.addresses}")
+    private String bootstrapAddresses;
+
     @Value("${kafka.topic.contractEvents}")
     private String contractEventsTopic;
 }
