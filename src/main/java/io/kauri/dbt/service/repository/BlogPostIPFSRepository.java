@@ -11,13 +11,11 @@ import net.consensys.tools.ipfs.ipfsstore.client.java.IPFSStore;
 import net.consensys.tools.ipfs.ipfsstore.client.springdata.impl.IPFSStoreRepositoryImpl;
 
 @Repository
-public class BlogIPFSRepository extends IPFSStoreRepositoryImpl<Document, String> {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(BlogIPFSRepository.class);
-    private static final String KEY = "blog";
+public class BlogPostIPFSRepository extends IPFSStoreRepositoryImpl<Document, String> {
+    private static final String KEY = "blogpost";
     
     @Autowired
-    public BlogIPFSRepository(IPFSStoreConfig config, IPFSStore client) {
+    public BlogPostIPFSRepository(IPFSStoreConfig config, IPFSStore client) {
         super(client, 
               config.getIndexes().get(KEY).getName(),
               config.getIndexes().get(KEY).getFields(),
