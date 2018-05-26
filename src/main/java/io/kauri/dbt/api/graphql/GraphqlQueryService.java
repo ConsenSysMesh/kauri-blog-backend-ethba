@@ -15,8 +15,10 @@ import io.kauri.dbt.service.BlogService;
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.annotations.GraphQLRootContext;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class GraphqlQueryService {
 
     private static final String DEFAULT_PAGE_SIZE = "20";  
@@ -40,10 +42,12 @@ public class GraphqlQueryService {
             @GraphQLArgument(name = "page", defaultValue = DEFAULT_PAGE_SIZE) int pageNo,
             @GraphQLArgument(name = "size", defaultValue = DEFAULT_PAGE_NO) int pageSize,
             @GraphQLArgument(name = "sort") String sortAttribute,
-            @GraphQLArgument(name = "dir") Sort.Direction sortDirection,
-            @GraphQLRootContext Principal principal) throws DBTException{ 
+            @GraphQLArgument(name = "dir") Sort.Direction sortDirection) throws DBTException{ 
         
-        PageRequest pagination = new PageRequest(pageNo, pageSize, new Sort((sortDirection!=null)?sortDirection:Sort.Direction.DESC, (sortAttribute!=null)?sortAttribute:"date_created"));
+        log.debug("searchBlogPost");
+        log.debug(filter.toString());
+        
+        PageRequest pagination = new PageRequest(pageNo, pageSize, new Sort((sortDirection!=null)?sortDirection:Sort.Direction.DESC, (sortAttribute!=null)?sortAttribute:"dateCreated"));
 
         return blogService.searchBlogPost(pagination, filter);
     }
