@@ -1,0 +1,96 @@
+version: '3'
+services:
+
+  parity:
+    build:
+      context: .
+      dockerfile: Dockerfile-ParityNode
+    ports:
+      - "8545:8545"
+      - "8180:8180"
+      - "8546:8546"
+    environment:
+      - ACCOUNTS=0xf0f15cedc719b5a55470877b0710d5c7816916b1,0x31b26E43651e9371C88aF3D36c14CfD938BaF4Fd
+      - FROM_ADDRESS=0x00a329c0648769a73afac7f9381e08fb43dbea72
+    volumes:
+      - $HOME/parity/data:/root/.local/share/io.parity.ethereum
+      - $HOME/parity/log:/data/parity-logs
+    tty: true
+    networks:
+      default:
+        aliases:
+          - eth-node
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - $HOME/mongodb/data/db:/data/db
+    networks:
+      - default
+      
+  elasticsearch:
+    image:  docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4
+    ports:
+          - "9200:9200"
+          - "9300:9300"
+    volumes:
+      - .elasticsearch-docker:/data/elasticsearch
+    networks:
+      - default
+          
+  ipfs:
+    image: jbenet/go-ipfs
+    ports:
+          - "4001:4001"
+          - "5001:5001"
+          - "8081:8080"
+    volumes:
+      - .ipfs-docker-data:/data/ipfs/
+      - .ipfs-docker-staging:/export
+
+  zookeeper:
+    image: confluent/zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      zk_id: "1"
+    
+  kafka:
+    image: confluent/kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+
+  monolith:
+    build: ./
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../smart-contracts:/smart-contracts
+    depends_on:
+      - mongodb
+      - parity
+      - elasticsearch
+      - ipfs
+      - zookeeper
+      - kafka
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
+      ETHEREUM_NODE_URL: http://eth-node:8545
+      ELASTIC_HOST: elasticsearch
+      ELASTIC_PORT: 9300
+      IPFS_HOST: ipfs
+      ZOOKEEPER_ADDRESS: zookeeper:2181
+      KAFKA_ADDRESSES: kafka:9092
+      LOG_LEVEL: TRACE
+      DOMAIN_NAME: .kauri.io
+    networks:
+      - default
+
+networks:
+  default:
