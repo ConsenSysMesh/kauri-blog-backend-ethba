@@ -69,7 +69,7 @@ services:
   dbt:
     build: ./
     ports:
-      - "8080:8080"
+      - "80:80"
     volumes:
       - ../smart-contracts:/smart-contracts
     depends_on:
