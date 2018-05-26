@@ -11,4 +11,4 @@ CMD sh run-dbt.sh
 ADD ./target/dbt.jar .
 ADD docker-scripts/run-dbt.sh .
 
-EXPOSE 8080
+EXPOSE 80
