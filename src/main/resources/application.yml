@@ -1,3 +1,16 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8080
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    net.consensys: ${LOG_LEVEL:INFO}
+
+
+
+
 #For IPFS-Doc-Persister Service
 ipfs-store:
   storage:

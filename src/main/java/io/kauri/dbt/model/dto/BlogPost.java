@@ -16,7 +16,7 @@ public class BlogPost {
     private String user;
     private String title;
     private String content;
-    private int totalTip;
+    private double totalTip;
     private Status status;
     private String contentHash;
     private Date dateCreated;

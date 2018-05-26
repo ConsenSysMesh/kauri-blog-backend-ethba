@@ -34,7 +34,6 @@ public class GraphqlMutationService {
         
         return blog;
     }
-    
 
     @GraphQLMutation(name = "savePost")
     public BlogPost savePost(
