@@ -11,10 +11,10 @@ contract Blog is ERC721Token {
   mapping (uint => bytes32) tokenToPostId;
   uint numberOfPosts = 0;
 
-  function Blog(string _name, string _symbol) public ERC721Token(_name, _symbol) {
+  constructor(string _name, string _symbol) public ERC721Token(_name, _symbol) {
   }
 
-  function submitPost(bytes32 _id, bytes32 _ipfsHash) {
+  function submitPost(bytes32 _id, bytes32 _ipfsHash) public {
     require(postExists[_id] == false);
     postExists[_id] = true;
     numberOfPosts ++;
@@ -23,13 +23,13 @@ contract Blog is ERC721Token {
     emit PostSubmitted(_id, _ipfsHash, msg.sender);
   }
 
-	function tipPost(bytes32 _id, address _author) {
+	function tipPost(bytes32 _id, address _author) public payable {
 		require(postExists[_id] == true);
 		_author.transfer(msg.value);
 		emit PostTipped(_id, msg.sender, msg.value);
 	}
 
-	function tipBlog(bytes32 _id, address _author) {
+	function tipBlog(address _author) public payable {
 		_author.transfer(msg.value);
 		emit BlogTipped(msg.sender, _author, msg.value);
 	}
