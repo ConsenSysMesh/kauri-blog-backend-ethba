@@ -1,0 +1,51 @@
+#For IPFS-Doc-Persister Service
+ipfs-store:
+  storage:
+    type: IPFS
+    host: ${IPFS_HOST:localhost}
+    port: ${IPFS_PORT:5001}
+    
+  index:
+    type: ELASTICSEARCH
+    host: ${ELASTIC_HOST:localhost}
+    port: ${ELASTIC_PORT:9300}
+    additional:
+      clusterName: ${ELASTIC_CLUSTERNAME:docker-cluster}
+      indexNullValue: true
+      
+  pinning:
+    strategies:
+      - 
+        id: ipfs_node
+        type: native
+        host: ${IPFS_HOST:localhost}
+        port: ${IPFS_PORT:5001}
+      - 
+        id: ipfs_cluster
+        type: ipfs_cluster
+        enable: ${IPFS_CLUSTER_ENABLE:false}
+        host: ${IPFS_CLUSTER_HOST:localhost}
+        port: ${IPFS_CLUSTER_PORT:9094}
+
+  api-spec:
+     base: /ipfs-store
+     store:
+        uri: /store
+     index:
+        uri: /index
+     store_index:
+        uri: /store_index
+     search:
+        uri: /search/{index}
+     fetch:
+        uri: /fetch/{index}/{hash}
+     config_index:
+        uri: /config/index/{index}
+
+ipfs-document-persiter:
+  indexes:
+    request:
+      name: blog
+      fields: id,title,content,user
+      fullTextFields: title,content
+     

@@ -17,7 +17,11 @@ public class BlogPost {
     private int totalTip;
     private Status status;
     private String contentHash;
-    
+
+    public BlogPost(String id, String user, String title, String content) {
+        this(user, title, content);
+        this.id = id;
+    }
     public BlogPost(String user, String title, String content) {
         this.user = user;
         this.title = title;

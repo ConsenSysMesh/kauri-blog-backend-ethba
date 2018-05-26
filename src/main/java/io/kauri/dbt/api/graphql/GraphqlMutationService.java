@@ -42,18 +42,14 @@ public class GraphqlMutationService {
             @GraphQLArgument(name = "title") String title,
             @GraphQLArgument(name = "content") String content) throws DBTException {
  
-        // new blogpost
-        if(StringUtils.isEmpty(id)) {
-
-            BlogPost post = new BlogPost(user, title, content);
-            post.setStatus(Status.DRAFT);
-            
-        // update
-        } else {
-            
+        BlogPost post = null;
+        if(StringUtils.isEmpty(id)) { // new blogpost
+            post = new BlogPost(user, title, content);      
+        } else { // update
+            post = new BlogPost(id, user, title, content);   
         }
         
-        BlogPost post = null;
+        blogService.submitBlogPost(post);
         
         return post;
     } 
