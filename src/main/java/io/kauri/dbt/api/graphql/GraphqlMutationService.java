@@ -25,9 +25,10 @@ public class GraphqlMutationService {
     @GraphQLMutation(name = "createBlog")
     public Blog createBlog(
             @GraphQLArgument(name = "user") String user,
-            @GraphQLArgument(name = "name") String name) throws DBTException {
+            @GraphQLArgument(name = "name") String name,
+            @GraphQLArgument(name = "tipAmount") double tipAmount) throws DBTException {
 
-        Blog blog = new Blog(user, name);
+        Blog blog = new Blog(user, name, tipAmount);
         
         //TODO store blog in mongo db
         
