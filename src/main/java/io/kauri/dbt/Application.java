@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"net.consensys.tools.ipfs.ipfsstore"})
+@ComponentScan({"io.kauri.dbt", "net.consensys.tools.ipfs.ipfsstore"})
 public class Application {
 
     public static void main(String[] args) {
