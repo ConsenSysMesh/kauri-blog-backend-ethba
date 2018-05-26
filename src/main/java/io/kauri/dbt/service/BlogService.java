@@ -28,9 +28,9 @@ import net.consensys.tools.ipfs.ipfsstore.service.StoreService;
 @Service
 public class BlogService {
 
-    private StoreService storeService;
     private BlogPostIPFSRepository blogPostRepository;
     private BlogMongoRepository blogMongoRepository;
+    private StoreService storeService;
     
     @Autowired
     public BlogService(BlogPostIPFSRepository repository, StoreService storeService, BlogMongoRepository blogMongoRepository) {
@@ -49,16 +49,23 @@ public class BlogService {
     }
     
     public BlogPost getBlogPost(String id) {
-        Document doc = blogPostRepository.findOne(id);
-
-        return convert(doc);
+        return convert(blogPostRepository.findOne(id));
     }
     
     public void createBlog(Blog blog) {
         blogMongoRepository.save(blog);
     }
     
-    public String submitBlogPost(BlogPost post) {
+    public BlogPost saveDraft(BlogPost post) {
+        return this.save(post, Status.DRAFT);
+    }
+    public BlogPost publish(BlogPost post) {
+        return this.save(post, Status.PUBLISHED);
+    }
+    
+    
+
+    private BlogPost save(BlogPost post, Status status) {
         
         Document doc = new Document();
         doc.setContent(post.getContent());
@@ -68,7 +75,7 @@ public class BlogService {
         
         
         Map<String, Object> indexFields = new HashMap<>();
-        indexFields.put("status", Status.DRAFT);
+        indexFields.put("status", status);
         if(StringUtils.isEmpty(post.getId())) {
             indexFields.put("dateCreated", new Date());
         }
@@ -76,11 +83,8 @@ public class BlogService {
         
         doc = blogPostRepository.save(doc, indexFields);
         
-        return doc.getId();
+        return this.getBlogPost(doc.getId());
     }
-    
-    
-
     
     private BlogPost convert(Document doc) {
         

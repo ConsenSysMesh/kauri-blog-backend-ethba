@@ -41,8 +41,6 @@ public class GraphqlMutationService {
  
         BlogPost post = new BlogPost(id, user, title, content);
 
-        String newId = blogService.submitBlogPost(post);
-        
-        return blogService.getBlogPost(newId);
+        return blogService.saveDraft(post);
     } 
 }
