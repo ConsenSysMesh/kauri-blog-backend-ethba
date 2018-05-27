@@ -153,8 +153,8 @@ public class DefaultBlogService implements BlogService {
             Timestamp dateUpdatedStamp = new Timestamp((Long) meta.getIndexFieldValue("dateUpdated"));
             Date dateUpdated = new Date(dateUpdatedStamp.getTime());
             post.setDateUpdated(dateUpdated);
-
-            post.setTotalTips((Double) meta.getIndexFieldValue("totalTips"));
+            if(meta.getIndexFieldValue("totalTips") != null)
+                post.setTotalTips((Double) meta.getIndexFieldValue("totalTips"));
             post.setBlogName(blogMongoRepository.findOneByUser(doc.getUser()).getName());
             
             return post;
