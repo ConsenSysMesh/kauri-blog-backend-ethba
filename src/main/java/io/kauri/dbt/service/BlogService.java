@@ -14,10 +14,15 @@ public interface BlogService {
 
     public BlogPost getBlogPost(String id) throws DBTException;
 
+    public Blog getBlog(String id) throws DBTException;
+
     public void createBlog(Blog blog) throws DBTException;
 
     public BlogPost saveDraft(BlogPost post) throws DBTException;
 
     public BlogPost publish(BlogPost post) throws DBTException;
 
+    BlogPost incrementPostTips(BlogPost post, double tipAmount) throws DBTException;
+
+    Blog incrementBlogTips(Blog blog, double tipAmount) throws DBTException;
 }
