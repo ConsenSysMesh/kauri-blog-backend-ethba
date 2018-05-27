@@ -1,6 +1,6 @@
 package io.kauri.dbt.service;
 
-import io.kauri.dbt.message.details.parameter.EventParameter;
+import net.consensys.eventeum.dto.event.parameter.EventParameter;
 import io.kauri.dbt.model.dto.Blog;
 import org.springframework.stereotype.Service;
 

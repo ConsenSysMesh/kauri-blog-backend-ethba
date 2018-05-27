@@ -1,4 +1,4 @@
-package io.kauri.dbt.message.details.parameter;
+package net.consensys.eventeum.dto.event.parameter;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

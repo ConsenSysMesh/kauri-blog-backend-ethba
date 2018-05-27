@@ -2,7 +2,7 @@ package io.kauri.dbt.message.details;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.kauri.dbt.message.details.parameter.EventParameter;
+import net.consensys.eventeum.dto.event.parameter.EventParameter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
