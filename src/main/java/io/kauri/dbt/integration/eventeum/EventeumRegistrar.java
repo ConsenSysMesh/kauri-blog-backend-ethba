@@ -4,10 +4,13 @@ import io.kauri.dbt.model.dto.eventeum.ParameterType;
 import io.kauri.dbt.service.EventeumService;
 import io.kauri.dbt.settings.EventeumSettings;
 import io.kauri.dbt.utils.ContractEventFilterBuilder;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class EventeumRegistrar implements InitializingBean {
 
@@ -59,6 +62,7 @@ public class EventeumRegistrar implements InitializingBean {
     }
 
     private String getContractAddress() {
+        log.info("############## eventeumSettings.getContractAddress() = {}", eventeumSettings.getContractAddress());
         return eventeumSettings.getContractAddress();
     }
 }
