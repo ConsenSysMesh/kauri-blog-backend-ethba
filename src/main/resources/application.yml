@@ -75,7 +75,7 @@ eventeum:
      
      
 cors:
-  origins: "*"
+  origins: "http://localhost:3000,http://35.153.74.129:80/graphql"
   methods: "GET,POST,PUT,OPTIONS,DELETE,PATCH"
   headers: "Access-Control-Allow-Headers,Origin,X-Requested-With,Content-Type,Accept,X-Auth-Token"
   credentials: "false"
