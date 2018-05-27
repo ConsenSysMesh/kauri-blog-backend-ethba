@@ -2,6 +2,8 @@ package io.kauri.dbt.service;
 
 import io.kauri.dbt.model.dto.eventeum.ContractEventFilter;
 import io.kauri.dbt.settings.EventeumSettings;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -41,6 +43,8 @@ public class RESTEventeumService implements EventeumService, InitializingBean {
         AddEventFilterResponse addEventFilter(@RequestBody ContractEventFilter filter);
     }
 
+    @Data
+    @NoArgsConstructor
     public class AddEventFilterResponse {
 
         private String id;
