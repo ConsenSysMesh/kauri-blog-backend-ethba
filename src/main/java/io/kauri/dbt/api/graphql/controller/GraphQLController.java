@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,7 @@ public class GraphQLController extends AbstractController {
         super(graphQLQueryService, graphQLMutationService);
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping(value = PATH, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public Object indexFromAnnotated(Principal principal, @RequestBody Map<String, Object> request) {

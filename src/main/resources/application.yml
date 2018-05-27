@@ -73,3 +73,9 @@ eventeum:
   url: http://eventeum:8060/api/rest/v1/
   contractAddress: "0xe5ed74837c78bef362180c4bf91c964c68ccb5c5"
      
+     
+cors:
+  origins: "*"
+  methods: "GET,POST,PUT,OPTIONS,DELETE,PATCH"
+  headers: "Access-Control-Allow-Headers,Origin,X-Requested-With,Content-Type,Accept,X-Auth-Token"
+  credentials: "false"
