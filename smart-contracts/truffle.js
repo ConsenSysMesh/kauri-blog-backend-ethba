@@ -13,13 +13,13 @@ module.exports = {
       provider: function() {
         return new HDWalletProvider(mnemonic, "https://rinkeby.infura.io/")
       },
-      network_id: 3
+      network_id: 4
     },
     ropsten: {
       provider: function() {
         return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/")
       },
-      network_id: 2
+      network_id: 3
     }    
   }
 };

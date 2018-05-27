@@ -514,7 +514,7 @@
   "source": "pragma solidity ^0.4.21;\n\nimport 'zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';\n\ncontract Blog is ERC721Token {\n  event PostSubmitted(bytes32 indexed id, address indexed creator, bytes32 ipfsHash);\n  event BlogTipped(address indexed tipper, address indexed author, uint amount);\n  event PostTipped(bytes32 indexed id, address indexed tipper, uint amount);\n\n  mapping (bytes32 => bool) postExists;\n  mapping (uint => bytes32) tokenToPostId;\n  uint numberOfPosts = 0;\n\n  constructor(string _name, string _symbol) public ERC721Token(_name, _symbol) {\n  }\n\n  function submitPost(bytes32 _id, bytes32 _ipfsHash) public {\n    require(postExists[_id] == false);\n    postExists[_id] = true;\n    numberOfPosts ++;\n    tokenToPostId[numberOfPosts] = _id;\n    _mint(msg.sender, numberOfPosts);\n    emit PostSubmitted(_id, msg.sender, _ipfsHash);\n  }\n\n\tfunction tipPost(bytes32 _id, address _author) public payable {\n\t\trequire(postExists[_id] == true);\n\t\t_author.transfer(msg.value);\n\t\temit PostTipped(_id, msg.sender, msg.value);\n\t}\n\n\tfunction tipBlog(address _author) public payable {\n\t\t_author.transfer(msg.value);\n\t\temit BlogTipped(msg.sender, _author, msg.value);\n\t}\n\n}\n",
   "sourcePath": "/Users/kendallcole/Desktop/kauri-blog-backend-ethba/smart-contracts/contracts/Blog.sol",
   "ast": {
-    "absolutePath": "/Users/kendallcole/Desktop/kauri-blog-backend-ethba/smart-contracts/contracts/Blog.sol",
+    "absolutePath": "/Users/craig/IdeaProjects/kauri-blog-backend-ethba/smart-contracts/contracts/Blog.sol",
     "exportedSymbols": {
       "Blog": [
         148
@@ -540,7 +540,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 149,
-        "sourceUnit": 1393,
+        "sourceUnit": 1450,
         "src": "26:66:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -554,10 +554,10 @@
               "id": 3,
               "name": "ERC721Token",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1392,
+              "referencedDeclaration": 1449,
               "src": "111:11:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ERC721Token_$1392",
+                "typeIdentifier": "t_contract$_ERC721Token_$1449",
                 "typeString": "contract ERC721Token"
               }
             },
@@ -567,12 +567,12 @@
           }
         ],
         "contractDependencies": [
-          288,
-          308,
-          315,
-          422,
-          1005,
-          1392
+          345,
+          365,
+          372,
+          479,
+          1062,
+          1449
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -580,12 +580,12 @@
         "id": 148,
         "linearizedBaseContracts": [
           148,
-          1392,
-          1005,
-          315,
-          308,
-          288,
-          422
+          1449,
+          1062,
+          372,
+          365,
+          345,
+          479
         ],
         "name": "Blog",
         "nodeType": "ContractDefinition",
@@ -1060,10 +1060,10 @@
                   "name": "ERC721Token",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1392,
+                  "referencedDeclaration": 1449,
                   "src": "531:11:0",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_ERC721Token_$1392_$",
+                    "typeIdentifier": "t_type$_t_contract$_ERC721Token_$1449_$",
                     "typeString": "type(contract ERC721Token)"
                   }
                 },
@@ -1244,10 +1244,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1410,
-                        1411
+                        1467,
+                        1468
                       ],
-                      "referencedDeclaration": 1410,
+                      "referencedDeclaration": 1467,
                       "src": "633:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1469,7 +1469,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "768:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1519,9 +1519,9 @@
                       "name": "_mint",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1312
+                        1369
                       ],
-                      "referencedDeclaration": 1312,
+                      "referencedDeclaration": 1369,
                       "src": "762:5:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$__$",
@@ -1831,10 +1831,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1410,
-                        1411
+                        1467,
+                        1468
                       ],
-                      "referencedDeclaration": 1410,
+                      "referencedDeclaration": 1467,
                       "src": "920:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1871,7 +1871,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "973:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1970,7 +1970,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "1008:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1999,7 +1999,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "1020:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2165,7 +2165,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "1107:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2251,7 +2251,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "1137:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2293,7 +2293,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "1158:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2423,7 +2423,7 @@
     "src": "0:1176:0"
   },
   "legacyAST": {
-    "absolutePath": "/Users/kendallcole/Desktop/kauri-blog-backend-ethba/smart-contracts/contracts/Blog.sol",
+    "absolutePath": "/Users/craig/IdeaProjects/kauri-blog-backend-ethba/smart-contracts/contracts/Blog.sol",
     "exportedSymbols": {
       "Blog": [
         148
@@ -2449,7 +2449,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 149,
-        "sourceUnit": 1393,
+        "sourceUnit": 1450,
         "src": "26:66:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2463,10 +2463,10 @@
               "id": 3,
               "name": "ERC721Token",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1392,
+              "referencedDeclaration": 1449,
               "src": "111:11:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ERC721Token_$1392",
+                "typeIdentifier": "t_contract$_ERC721Token_$1449",
                 "typeString": "contract ERC721Token"
               }
             },
@@ -2476,12 +2476,12 @@
           }
         ],
         "contractDependencies": [
-          288,
-          308,
-          315,
-          422,
-          1005,
-          1392
+          345,
+          365,
+          372,
+          479,
+          1062,
+          1449
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -2489,12 +2489,12 @@
         "id": 148,
         "linearizedBaseContracts": [
           148,
-          1392,
-          1005,
-          315,
-          308,
-          288,
-          422
+          1449,
+          1062,
+          372,
+          365,
+          345,
+          479
         ],
         "name": "Blog",
         "nodeType": "ContractDefinition",
@@ -2969,10 +2969,10 @@
                   "name": "ERC721Token",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1392,
+                  "referencedDeclaration": 1449,
                   "src": "531:11:0",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_ERC721Token_$1392_$",
+                    "typeIdentifier": "t_type$_t_contract$_ERC721Token_$1449_$",
                     "typeString": "type(contract ERC721Token)"
                   }
                 },
@@ -3153,10 +3153,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1410,
-                        1411
+                        1467,
+                        1468
                       ],
-                      "referencedDeclaration": 1410,
+                      "referencedDeclaration": 1467,
                       "src": "633:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -3378,7 +3378,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "768:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -3428,9 +3428,9 @@
                       "name": "_mint",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1312
+                        1369
                       ],
-                      "referencedDeclaration": 1312,
+                      "referencedDeclaration": 1369,
                       "src": "762:5:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$__$",
@@ -3740,10 +3740,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1410,
-                        1411
+                        1467,
+                        1468
                       ],
-                      "referencedDeclaration": 1410,
+                      "referencedDeclaration": 1467,
                       "src": "920:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -3780,7 +3780,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "973:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -3879,7 +3879,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "1008:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -3908,7 +3908,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "1020:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -4074,7 +4074,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "1107:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -4160,7 +4160,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "1137:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -4202,7 +4202,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1407,
+                          "referencedDeclaration": 1464,
                           "src": "1158:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",

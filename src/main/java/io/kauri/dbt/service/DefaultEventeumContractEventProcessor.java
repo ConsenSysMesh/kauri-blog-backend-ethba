@@ -19,11 +19,19 @@ public class DefaultEventeumContractEventProcessor implements EventeumContractEv
     private Map<String, Consumer<EventeumEventDetails>> messageConsumers;
 
     @Autowired
-    public DefaultEventeumContractEventProcessor(ReconciliationService reconciliationService) {
+    public DefaultEventeumContractEventProcessor(SmartContractEventService smartContractEventService) {
         messageConsumers = new HashMap<>();
 
         messageConsumers.put(ContractEvents.POST_SUBMITTED, (eventDetails) -> {
-            reconciliationService.reconcilePostSubmittedEvent(eventDetails);
+            smartContractEventService.onPostSubmittedEvent(eventDetails);
+        });
+
+        messageConsumers.put(ContractEvents.POST_TIPPED, (eventDetails) -> {
+            smartContractEventService.onPostTippedEvent(eventDetails);
+        });
+
+        messageConsumers.put(ContractEvents.BLOG_TIPPED, (eventDetails) -> {
+            smartContractEventService.onBlogTippedEvent(eventDetails);
         });
     }
 

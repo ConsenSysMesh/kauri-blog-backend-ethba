@@ -62,6 +62,10 @@ public class DefaultBlogService implements BlogService {
     public BlogPost getBlogPost(String id) throws DBTException  {
         return convert(blogPostRepository.findOne(id));
     }
+
+    public Blog getBlog(String id) throws DBTException  {
+        return blogMongoRepository.findOne(id);
+    }
     
     public void createBlog(Blog blog) throws DBTException  {
         blogMongoRepository.save(blog);
@@ -87,8 +91,24 @@ public class DefaultBlogService implements BlogService {
         
         return this.save(post, Status.PUBLISHED);
     }
+
+    public BlogPost incrementPostTips(BlogPost post, double tipAmount) throws DBTException {
+        incrementBlogTips(getBlog(post.getUser()), tipAmount);
+
+        BlogPost current = this.getBlogPost(post.getId());
+
+        current.setTotalTips(current.getTotalTips() + tipAmount);
+
+        return save(current, current.getStatus());
+    }
     
-    
+    public Blog incrementBlogTips(Blog blog, double tipAmount) throws DBTException {
+        Blog current = this.getBlog(blog.getUser());
+
+        current.setTotalTips(current.getTotalTips() + tipAmount);
+
+        return blogMongoRepository.save(current);
+    }
 
     private BlogPost save(BlogPost post, Status status) throws DBTException {
         
@@ -105,6 +125,7 @@ public class DefaultBlogService implements BlogService {
             indexFields.put("dateCreated", new Date());
         }
         indexFields.put("dateUpdated", new Date());
+        indexFields.put("totalTips", post.getTotalTips());
         
         doc = blogPostRepository.save(doc, indexFields);
         
@@ -132,8 +153,15 @@ public class DefaultBlogService implements BlogService {
             Timestamp dateUpdatedStamp = new Timestamp((Long) meta.getIndexFieldValue("dateUpdated"));
             Date dateUpdated = new Date(dateUpdatedStamp.getTime());
             post.setDateUpdated(dateUpdated);
-            //post.setTotalTip((Long) meta.getIndexFieldValue("totalTips"));
-            post.setBlogName(blogMongoRepository.findOneByUser(doc.getUser()).getName());
+            
+            if(meta.getIndexFieldValue("totalTips") != null) {
+                post.setTotalTips((Double) meta.getIndexFieldValue("totalTips"));
+            }
+                            
+            Blog blog = getBlog(doc.getUser());
+            if(blog != null) {
+                post.setBlogName(blog.getName());
+            }            
             
             return post;
             
