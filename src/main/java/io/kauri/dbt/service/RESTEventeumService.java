@@ -40,7 +40,7 @@ public class RESTEventeumService implements EventeumService, InitializingBean {
 
         @RequestMapping(method = RequestMethod.POST,
                 value="event-filter", consumes="application/json", produces="application/json")
-        AddEventFilterResponse addEventFilter(@RequestBody ContractEventFilter filter);
+        void addEventFilter(@RequestBody ContractEventFilter filter);
     }
 
     @Data

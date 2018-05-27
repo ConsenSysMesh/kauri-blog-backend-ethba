@@ -3,10 +3,12 @@ package io.kauri.dbt.utils;
 import io.kauri.dbt.model.dto.eventeum.ContractEventFilter;
 import io.kauri.dbt.model.dto.eventeum.ContractEventSpecification;
 import io.kauri.dbt.model.dto.eventeum.ParameterType;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class ContractEventFilterBuilder {
 
     private String id;
@@ -65,6 +67,9 @@ public class ContractEventFilterBuilder {
         filter.setEventSpecification(spec);
         filter.setId(id);
 
+
+        log.info("############## filter contract = {}", filter.getContractAddress());
+        
         return filter;
     }
 }

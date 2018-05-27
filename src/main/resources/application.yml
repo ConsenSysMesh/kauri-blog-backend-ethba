@@ -71,5 +71,5 @@ kafka:
 
 eventeum:
   url: http://eventeum:8060/api/rest/v1/
-  contractAddress: 0xe5ed74837c78bef362180c4bf91c964c68ccb5c5
+  contractAddress: "0xe5ed74837c78bef362180c4bf91c964c68ccb5c5"
      
